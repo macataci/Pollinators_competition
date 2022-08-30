@@ -1,5 +1,5 @@
 library(deSolve)
-library(ggplot2) 
+library(ggplot2) # because we will plot things
 library(tidyr)
 
 Model <- function(t, y, p) {
@@ -7,7 +7,7 @@ Model <- function(t, y, p) {
   TP <- N[2]+N[3]
   with(as.list(p), {
     dB.dt <- beta*N[1] * (1-(N[1]/K[1]))*c*(TP/(D+TP))-(d[1]*N[1])
-    dP1.dt <- a[1]*N[1]*(1-(N[2]/K[2]))*c*N[2]*(1/(TP+D))-(d[2]*N[2])
+    dP1.dt <- a[1]*N[1]*(1-(N[2]/K[2]))*c*N[2]*(1/(TP+D))-(CHANGE)
     dP2.dt <-  a[2] * N[1]*(1-(N[3]/K[3]))*c*N[3]*(1/(TP+D))-(d[3]*N[3])
     return(list(c(dB.dt, dP1.dt, dP2.dt)))
   })
@@ -22,7 +22,9 @@ a <- c(0.007, 0.006)
 c <- 50
 D <- 500
 K <- c(10, 100,100)
-d <- c(0.008, 0.004, 0.004)
+d <- 0.008
+#lij, lji
+l <- c( , )
 p <- list(beta, a, c, D, K, d)
 N0 <- c(10, 1, 100)
 t <- c(1:100)
@@ -33,7 +35,7 @@ out <- as.data.frame(out)
 colnames(out) <- c("Time", "Bees", "P1", "P2")
 head(out)
 View(out)
-  
+
 df <- pivot_longer(out, cols = 2:4)
 colnames(df) <- c("Time", "Pop", "N")
 ggplot(df) +
