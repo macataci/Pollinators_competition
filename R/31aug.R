@@ -16,15 +16,14 @@ Model <- function(t, y, p) {
 # we can change gammas
 
 #Parameters Killing P1
-
-beta <- 0.005
+beta <- 0.05
 a <- c(3.2, 20)
 c <- 20
 D <- 3
-K <- c(10, 0.0981,0.00058)
+K <- c(80, 0.0981, 0.00058)
 d <- c(0.008, 1, 1)
 p <- list(beta, a, c, D, K, d)
-N0 <- c(2, 100, 100)
+N0 <- c(10, 100, 100)
 t <- c(1:1000)
 
 
